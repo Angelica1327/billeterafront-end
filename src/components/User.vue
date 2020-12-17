@@ -28,10 +28,11 @@
             <br />
             <a href="#">¿Ha olvidado su contraseña?</a> <br />
             <a v-on:click="mostrarRegistro()">Registrarse</a>
+            <h2>{{salida}}</h2>
           </form>
         </div>
       </div>
-    </body>
+      </body>
   </html>
 </template>
 
@@ -44,12 +45,14 @@ export default {
       user_in_db: {
         username: "",
         contraseña: ""
-      }
+      },
+      salida: "Esperando autenticación"
     };
   },
   methods: {
     Autenticar() {
       var self = this;
+      console.log("hola entre");
       axios
         .post("https://billetera-app.herokuapp.com/user/", self.user_in, {
           headers: {}

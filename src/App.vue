@@ -56,7 +56,7 @@
     },
 
     beforeCreate: function(){
-      localStorage.setItem('current_username')
+      localStorage.setItem('current_username', username)
       localStorage.setItem('isAuth', true)
 
       this.$router.push({name: "root"})
