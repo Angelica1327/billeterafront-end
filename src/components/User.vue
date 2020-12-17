@@ -52,11 +52,9 @@ export default {
   methods: {
     Autenticar() {
       var self = this;
-      console.log("hola entre");
+      console.log("hola entre", self.user_in_db);
       axios
-        .post("https://billetera-app.herokuapp.com/user/", self.user_in, {
-          headers: {}
-        })
+        .get(`https://billetera-app.herokuapp.com/user/${self.user_in_db.username}`)
         .then(result => {
           alert("Autenticación exitosa");
           self.$emit("login", self.user_in.username);

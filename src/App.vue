@@ -4,9 +4,9 @@
 
       <h1>BilleterAPP</h1>
       <nav>
-        <button v-on:click="getBalance"  > Inicio </button>
-        <button v-on:click="init"  > Ingresar </button>
-        <button v-on:click="getRegistro"  > Registrar </button>
+        <button v-on:click="getBalance" > Inicio </button>
+        <button v-on:click="init" > Ingresar </button>
+        <button v-on:click="getRegistro"> Registrar </button>
       </nav>
     </div>
     <div class="main-component">
