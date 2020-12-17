@@ -1,11 +1,4 @@
 <template>
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>BilleterApp</title>
-    </head>
     <body>
       <div class="login" id="login">
         <div class="Titulo">
@@ -33,13 +26,12 @@
         </div>
       </div>
       </body>
-  </html>
 </template>
 
 <script>
 import axios from "axios";
 export default {
-  name: "App",
+  name: "User",
   data: function() {
     return {
       user_in_db: {
@@ -54,17 +46,21 @@ export default {
       var self = this;
       console.log("hola entre", self.user_in_db);
       axios
-        .get(`https://billetera-app.herokuapp.com/user/${self.user_in_db.username}`)
+        .get(`http://localhost:8000/user/${self.user_in_db.username}`)
         .then(result => {
+          console.log(result);
+          if (result.data.password == self.user_in_db.contrasena)
+              this.$router.push({name: "perfil", params:{user: result.data}})
           alert("Autenticación exitosa");
-          self.$emit("login", self.user_in.username);
+          self.$emit("login", self.user_in_db.username);
         })
 
         .catch(error => {
-          if (error.response.status == "404")
+          console.log(error)
+          if (error.response == "404")
             alert("ERROR 404: Usuario no encontrado.");
 
-          if (error.response.status == "403")
+          if (error.response == "403")
             alert("ERROR 403: Contraseña Erronea.");
         });
     }

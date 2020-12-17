@@ -21,7 +21,6 @@
 <script>
   export default {
     name: 'App',
-
     components: {},
 
     data: function(){
@@ -56,10 +55,10 @@
     },
 
     beforeCreate: function(){
-      localStorage.setItem('current_username', username)
+      localStorage.setItem('current_username', this.username)
       localStorage.setItem('isAuth', true)
 
-      this.$router.push({name: "root"})
+      
     }
    
   }
@@ -115,7 +114,7 @@
     height: 110vh;
     margin: 0%;
     padding: 0%;
-    background-image: url(./assets/ORSFZF0.jpg);
+    background-image: url('./assets/ORSFZF0.jpg');
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;

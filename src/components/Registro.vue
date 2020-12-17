@@ -1,144 +1,145 @@
 <template>
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>BilleterApp</title>
-    </head>
-    <body>
-      <div v-if="registro" class="registrar" id="registrar">
-        <div class="Titulo">
-          <h1>Billeter<span>App</span></h1>
-          <h2>Registrar</h2>
-          <form action="">
-            <table>
-              <tr>
-                <td>
-                  <label for="Nombre"> Nombre</label>
-                  <input
-                    type="text"
-                    placeholder="Nombre"
-                    id="Nomb"
-                    v-model="nombres"
-                  />
-                </td>
-                <td>
-                  <label for="Usuario"> Usuario</label>
-                  <input
-                    type="text"
-                    placeholder="Usuario"
-                    id="user"
-                    v-model="usuarios"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="Contrasena">Contraseña </label>
-                  <input
-                    type="password"
-                    placeholder="Contraseña"
-                    id="contra"
-                    v-model="contraseñas"
-                  />
-                </td>
-                <td>
-                  <label for="email">Email</label>
-                  <input
-                    type="email"
-                    placeholder="email"
-                    id="correo"
-                    v-model="correos"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="edad"> Edad</label>
-                  <input
-                    type="number"
-                    placeholder="edad"
-                    id="edad"
-                    v-model="edades"
-                  />
-                </td>
-                <td>
-                  <label for="cedula">Cédula</label>
-                  <input
-                    type="number"
-                    placeholder="cedula"
-                    id="cc"
-                    v-model="cedulas"
-                  />
-                </td>
-              </tr>
-              <button @click="mostrarDatos" class="boton" type="button">
-                Registrar
-              </button>
-              <br />
-              <br />
-            </table>
-          </form>
-        </div>
+  <body>
+    <div v-if="registro" class="registrar" id="registrar">
+      <div class="Titulo">
+        <h1>Billeter<span>App</span></h1>
+        <h2>Registrar</h2>
+        <form action="">
+          <table>
+            <tr>
+              <td>
+                <label for="Nombre"> Nombre</label>
+                <input
+                  type="text"
+                  placeholder="Nombre"
+                  id="Nomb"
+                  v-model="nombres"
+                />
+              </td>
+              <td>
+                <label for="Usuario"> Usuario</label>
+                <input
+                  type="text"
+                  placeholder="Usuario"
+                  id="user"
+                  v-model="usuarios"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="Contrasena">Contraseña </label>
+                <input
+                  type="password"
+                  placeholder="Contraseña"
+                  id="contra"
+                  v-model="contraseñas"
+                />
+              </td>
+              <td>
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  placeholder="email"
+                  id="correo"
+                  v-model="correos"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="edad"> Edad</label>
+                <input
+                  type="number"
+                  placeholder="edad"
+                  id="edad"
+                  v-model="edades"
+                />
+              </td>
+              <td>
+                <label for="cedula">Cédula</label>
+                <input
+                  type="number"
+                  placeholder="cedula"
+                  id="cc"
+                  v-model="cedulas"
+                />
+              </td>
+            </tr>
+            <button @click="mostrarDatos" class="boton" type="button">
+              Registrar
+            </button>
+            <br />
+            <br />
+          </table>
+        </form>
       </div>
-      <div v-if="datos" id="app">
-        <div class="header">
-          <h1>BilleterAPP</h1>
-        </div>
-        <div class="main-component">
-          <div class="registrar" id="registrar">
-            <div class="Titulo">
-              <h1>Billeter<span>App</span></h1>
-              <h2>Datos</h2>
-              <form action="">
-                <table>
-                  <tr>
-                    <td>
-                      <h3> Nombre: <span>{{ nombres }}</span></h3>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td>
-                      <h3> Usuario: <span>{{ usuarios }}</span></h3>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h3> Contraseña:<span>{{ contraseñas }}</span></h3>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td>
-                      <h3> Email: <span>{{ correos }}</span>  </h3>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h3> Edad: <span>{{ edades }}</span>  </h3>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                     <h3> Cédula: <span>{{ cedulas }}</span>  </h3>
-                    </td>
-                  </tr>
-                </table>
-              </form>
-            </div>
+    </div>
+    <div v-if="datos" id="app">
+      <div class="header">
+        <h1>BilleterAPP</h1>
+      </div>
+      <div class="main-component">
+        <div class="registrar" id="registrar">
+          <div class="Titulo">
+            <h1>Billeter<span>App</span></h1>
+            <h2>Datos</h2>
+            <form action="">
+              <table>
+                <tr>
+                  <td>
+                    <h3>
+                      Nombre: <span>{{ nombres }}</span>
+                    </h3>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h3>
+                      Usuario: <span>{{ usuarios }}</span>
+                    </h3>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h3>
+                      Contraseña:<span>{{ contraseñas }}</span>
+                    </h3>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h3>
+                      Email: <span>{{ correos }}</span>
+                    </h3>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h3>
+                      Edad: <span>{{ edades }}</span>
+                    </h3>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h3>
+                      Cédula: <span>{{ cedulas }}</span>
+                    </h3>
+                  </td>
+                </tr>
+              </table>
+            </form>
           </div>
         </div>
-        <div class="footer">
-          <h2>Misión TIC 2022</h2>
-        </div>
       </div>
-    </body>
-  </html>
+    </div>
+  </body>
 </template>
 
 <script>
 export default {
-  name: "App",
+  name: "Registro",
   data: function() {
     return {
       nombres: "",
@@ -170,7 +171,6 @@ body {
   color: #1dc4e7;
 }
 
-
 .registrar {
   width: 500px;
   height: 520px;
@@ -187,8 +187,6 @@ body {
   padding-bottom: 30px;
   padding-right: 30px;
   padding-left: 30px;
-
-
 }
 
 .registrar h1 {
