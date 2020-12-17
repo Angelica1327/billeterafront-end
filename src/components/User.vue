@@ -46,7 +46,7 @@ export default {
       var self = this;
       console.log("hola entre", self.user_in_db);
       axios
-        .get(`http://billetera-app.herokuapp.com/${self.user_in_db.username}`)
+        .get(`https://billetera-app.herokuapp.com/${self.user_in_db.username}`)
         .then(result => {
           console.log(result);
           if (result.data.password == self.user_in_db.contrasena)
