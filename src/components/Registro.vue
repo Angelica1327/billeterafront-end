@@ -127,7 +127,7 @@ export default {
       this.regist = !this.regist;
       var config = {
         method: "post",
-        url: `http://billetera-app.herokuapp.com/user/registro?username=${self.user_in_db.username}`,
+        url: `https://billetera-app.herokuapp.com/user/registro?username=${self.user_in_db.username}`,
         // url: `http://localhost:8000/user/registro?username=${self.user_in_db.username}`,
         headers: {
           "Content-Type": "application/json"
