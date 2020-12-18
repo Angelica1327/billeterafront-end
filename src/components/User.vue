@@ -1,31 +1,31 @@
 <template>
-    <body>
-      <div class="login" id="login">
-        <div class="Titulo">
-          <h1>Billeter<span>App</span></h1>
-          <h2>Ingresar</h2>
-          <form v-on:submit.prevent="Autenticar">
-            <label for="Usuario">Usuario</label>
-            <input
-              type="text"
-              placeholder="Usuario"
-              v-model="user_in_db.username"
-            />
-            <label for="Contrasena"> Contraseña </label>
-            <input
-              type="password"
-              placeholder="Contraseña"
-              v-model="user_in_db.contrasena"
-            />
-            <button class="boton" type="submit">Ingresar</button> <br />
-            <br />
-            <a href="#">¿Ha olvidado su contraseña?</a> <br />
-            <a v-on:click="mostrarRegistro()">Registrarse</a>
-            <h2>{{salida}}</h2>
-          </form>
-        </div>
+  <body>
+    <div class="login" id="login">
+      <div class="Titulo">
+        <h1>Billeter<span>App</span></h1>
+        <h2>Ingresar</h2>
+        <form v-on:submit.prevent="Autenticar">
+          <label for="Usuario">Usuario</label>
+          <input
+            type="text"
+            placeholder="Usuario"
+            v-model="user_in_db.username"
+          />
+          <label for="Contrasena"> Contraseña </label>
+          <input
+            type="password"
+            placeholder="Contraseña"
+            v-model="user_in_db.contrasena"
+          />
+          <button class="boton" type="submit">Ingresar</button> <br />
+          <br />
+          <a href="#">¿Ha olvidado su contraseña?</a> <br />
+          <a v-on:click="mostrarRegistro()">Registrarse</a>
+          <h2>{{ salida }}</h2>
+        </form>
       </div>
-      </body>
+    </div>
+  </body>
 </template>
 
 <script>
@@ -45,23 +45,30 @@ export default {
     Autenticar() {
       var self = this;
       console.log("hola entre", self.user_in_db);
-      axios
-        .get(`https://billetera-app.herokuapp.com/${self.user_in_db.username}`)
+
+      var config = {
+        method: "GET",
+        // url: `https://billetera-app.herokuapp.com/user/${self.user_in_db.username}`,
+        url: `http://localhost:8000/user/${self.user_in_db.username}`,
+      };
+
+      axios(config)
         .then(result => {
           console.log(result);
           if (result.data.password == self.user_in_db.contrasena)
-              this.$router.push({name: "perfil", params:{user: result.data}})
+            this.$router.push({
+              name: "perfil",
+              params: { user: result.data }
+            });
           alert("Autenticación exitosa");
           self.$emit("login", self.user_in_db.username);
         })
-
         .catch(error => {
-          console.log(error)
+          console.log("error",error);
           if (error.response == "404")
             alert("ERROR 404: Usuario no encontrado.");
 
-          if (error.response == "403")
-            alert("ERROR 403: Contraseña Erronea.");
+          if (error.response == "403") alert("ERROR 403: Contraseña Erronea.");
         });
     }
   }
