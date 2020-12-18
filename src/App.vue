@@ -10,7 +10,7 @@
       </nav>
     </div>
     <div class="main-component">
-      <router-view></router-view>
+       <router-view></router-view>
     </div>
     <div class="footer">
       <h2>Misión TIC 2022</h2>
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+  import vueRouter from 'vue-router'
   export default {
     name: 'App',
     components: {},
@@ -59,8 +60,29 @@
       localStorage.setItem('isAuth', true)
 
       
-    }
-   
+    },
+     Registro() {
+      var self = this;
+      self.is_auth  = localStorage.getItem('isAuth') || false
+
+      if(self.is_auth == false)
+        self.$router.push({name: "user"})
+
+      else{
+        let username = localStorage.getItem("current_username")
+        self.$router.push({name: "perfil", params:{ username: username }})
+      }
+
+    },
+
+    Login(username){
+      localStorage.setItem('current_username', username)
+      localStorage.setItem('isAuth', true)
+      this.Registro()
+    },
+
+
+    
   }
 </script>
 

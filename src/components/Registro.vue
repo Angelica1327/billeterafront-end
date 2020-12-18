@@ -1,10 +1,10 @@
 <template>
   <body>
-    <div v-if="registro" class="registrar" id="registrar">
+    <div v-if="regist" class="registrar" id="registrar">
       <div class="Titulo">
         <h1>Billeter<span>App</span></h1>
         <h2>Registrar</h2>
-        <form action="">
+        <form >
           <table>
             <tr>
               <td>
@@ -13,7 +13,7 @@
                   type="text"
                   placeholder="Nombre"
                   id="Nomb"
-                  v-model="nombres"
+                  v-model="user_in_db.nombre"
                 />
               </td>
               <td>
@@ -22,7 +22,7 @@
                   type="text"
                   placeholder="Usuario"
                   id="user"
-                  v-model="usuarios"
+                  v-model="user_in_db.username"
                 />
               </td>
             </tr>
@@ -33,7 +33,7 @@
                   type="password"
                   placeholder="Contraseña"
                   id="contra"
-                  v-model="contraseñas"
+                  v-model="user_in_db.password"
                 />
               </td>
               <td>
@@ -42,27 +42,7 @@
                   type="email"
                   placeholder="email"
                   id="correo"
-                  v-model="correos"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label for="edad"> Edad</label>
-                <input
-                  type="number"
-                  placeholder="edad"
-                  id="edad"
-                  v-model="edades"
-                />
-              </td>
-              <td>
-                <label for="cedula">Cédula</label>
-                <input
-                  type="number"
-                  placeholder="cedula"
-                  id="cc"
-                  v-model="cedulas"
+                  v-model="user_in_db.email"
                 />
               </td>
             </tr>
@@ -84,47 +64,33 @@
           <div class="Titulo">
             <h1>Billeter<span>App</span></h1>
             <h2>Datos</h2>
-            <form action="">
+            <form v-on:submit.prevent="Registro">
               <table>
                 <tr>
                   <td>
                     <h3>
-                      Nombre: <span>{{ nombres }}</span>
+                      Nombre: <span>{{ user_in_db.nombre }}</span>
                     </h3>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <h3>
-                      Usuario: <span>{{ usuarios }}</span>
+                      Usuario: <span>{{ user_in_db.username }}</span>
                     </h3>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <h3>
-                      Contraseña:<span>{{ contraseñas }}</span>
+                      Contraseña:<span>{{ user_in_db.password }}</span>
                     </h3>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <h3>
-                      Email: <span>{{ correos }}</span>
-                    </h3>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <h3>
-                      Edad: <span>{{ edades }}</span>
-                    </h3>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <h3>
-                      Cédula: <span>{{ cedulas }}</span>
+                      Email: <span>{{ user_in_db.email }}</span>
                     </h3>
                   </td>
                 </tr>
@@ -138,27 +104,60 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Registro",
-  data: function() {
+  data: function () {
     return {
-      nombres: "",
-      usuarios: "",
-      contraseñas: "",
-      correos: "",
-      edades: "",
-      cedulas: "",
+     user_in_db: {
+      "nombre":"",
+      "username":"",
+      "password":"",
+      "email":"",
+     },
+
       datos: false,
-      registro: true
+      regist: true,
+      
     };
   },
 
   methods: {
-    mostrarDatos() {
+    mostrarDatos(user_in_db, username) {
       this.datos = !this.datos;
-      this.registro = !this.registro;
-    }
-  }
+      this.regist = !this.regist;
+
+      var self = this;
+      self.user_in_db.username = localStorage.getItem("username");
+      axios
+        .post(`https://billetera-app.herokuapp.com/user/registro`, self.user_in_db)
+        .then((data) => {
+          console.log(data);
+        });
+
+      console.log(this.user_in_db)
+    },
+      // post_usuario: function () {
+      
+      // var self = this;
+      // axios
+      //   .post("http://127.0.0.1:8000/user/registro/", self.user_in_db, {
+      //     headers: {},
+      //   })
+      //   .then((result) => {
+      //     alert("Autenticación Exitosa");
+      //     self.$emit("login", self.user_in_db.username);
+      //   })
+      //   .catch((error) => {
+
+      //               if (error.response.status == "404")
+      //                   alert("ERROR 404: Usuario no encontrado.");
+
+      //               if (error.response.status == "403")
+      //                   alert("ERROR 403: Contraseña Erronea.");
+      //           });
+//     },
+  },
 };
 </script>
 
