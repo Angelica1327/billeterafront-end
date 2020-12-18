@@ -15,7 +15,7 @@
             <input
               type="password"
               placeholder="Contraseña"
-              v-model="user_in_db.contrasena"
+              v-model="user_in_db.contraseña"
             />
             <button class="boton" type="submit">Ingresar</button> <br />
             <br />
@@ -44,9 +44,7 @@ export default {
   methods: {
     Autenticar() {
       var self = this;
-      console.log("hola entre", self.user_in_db);
-
-      var config = {
+           var config = {
         method: "GET",
         url: `https://billetera-app.herokuapp.com/user/${self.user_in_db.username}`,
         // url: `http://localhost:8000/user/${self.user_in_db.username}`,
@@ -55,7 +53,7 @@ export default {
       axios(config)
         .then(result => {
           console.log(result);
-          if (result.data.password == self.user_in_db.contrasena)
+          if (result.data.password == self.user_in_db.contraseña)
               this.$router.push({name: "perfil", params:{user: result.data}})
           alert("Autenticación exitosa");
           self.$emit("login", self.user_in_db.username);

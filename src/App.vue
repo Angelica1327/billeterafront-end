@@ -56,12 +56,14 @@
     },
 
     beforeCreate: function(){
+      console.log("Entre mal")
       localStorage.setItem('current_username', this.username)
       localStorage.setItem('isAuth', true)
 
       
     },
      Registro() {
+       console.log("MAL RE MAL")
       var self = this;
       self.is_auth  = localStorage.getItem('isAuth') || false
 
@@ -70,7 +72,7 @@
 
       else{
         let username = localStorage.getItem("current_username")
-        self.$router.push({name: "perfil", params:{ username: username }})
+        self.$router.push({name: "Registro", params:{ username: username }})
       }
 
     },

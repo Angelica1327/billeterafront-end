@@ -4,7 +4,7 @@
       <div class="Titulo">
         <h1>Billeter<span>App</span></h1>
         <h2>Registrar</h2>
-        <form >
+        <form name="DatosUsuario" v-on:submit.prevent="post_usuario">
           <table>
             <tr>
               <td>
@@ -46,7 +46,7 @@
                 />
               </td>
             </tr>
-            <button @click="mostrarDatos" class="boton" type="button">
+            <button class="boton" type="submit">
               Registrar
             </button>
             <br />
@@ -64,7 +64,7 @@
           <div class="Titulo">
             <h1>Billeter<span>App</span></h1>
             <h2>Datos</h2>
-            <form v-on:submit.prevent="Registro">
+            <form v-on:submit.prevent="post_usuario">
               <table>
                 <tr>
                   <td>
@@ -107,57 +107,38 @@
 import axios from "axios";
 export default {
   name: "Registro",
-  data: function () {
+  data: function() {
     return {
-     user_in_db: {
-      "nombre":"",
-      "username":"",
-      "password":"",
-      "email":"",
-     },
-
+      user_in_db: {
+        nombre: "",
+        username: "",
+        password: "",
+        email: ""
+      },
       datos: false,
-      regist: true,
-      
+      regist: true
     };
   },
 
   methods: {
-    mostrarDatos(user_in_db, username) {
+    post_usuario() {
+      var self = this;
       this.datos = !this.datos;
       this.regist = !this.regist;
-
-      var self = this;
-      self.user_in_db.username = localStorage.getItem("username");
-      axios
-        .post(`https://billetera-app.herokuapp.com/user/registro`, self.user_in_db)
-        .then((data) => {
-          console.log(data);
-        });
-
-      console.log(this.user_in_db)
-    },
-      // post_usuario: function () {
-      
-      // var self = this;
-      // axios
-      //   .post("http://127.0.0.1:8000/user/registro/", self.user_in_db, {
-      //     headers: {},
-      //   })
-      //   .then((result) => {
-      //     alert("Autenticación Exitosa");
-      //     self.$emit("login", self.user_in_db.username);
-      //   })
-      //   .catch((error) => {
-
-      //               if (error.response.status == "404")
-      //                   alert("ERROR 404: Usuario no encontrado.");
-
-      //               if (error.response.status == "403")
-      //                   alert("ERROR 403: Contraseña Erronea.");
-      //           });
-//     },
-  },
+      var config = {
+        method: "post",
+        url: `http://billetera-app.herokuapp.com/user/registro?username=${self.user_in_db.username}`,
+        // url: `http://localhost:8000/user/registro?username=${self.user_in_db.username}`,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        data: JSON.stringify(self.user_in_db)
+      };
+      axios(config).then(result => {
+        console.log(result.data);
+      });
+    }
+  }
 };
 </script>
 
