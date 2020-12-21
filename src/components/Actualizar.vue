@@ -59,7 +59,7 @@ export default {
       var self = this;
       var config = {
         method: "put",
-        url: `https://billetera-app.herokuapp.com/user/registro?username=${this.$route.params.user.username}`,
+        url: `https://billetera-app.herokuapp.com/user/put?username=${this.$route.params.user.username}`,
         // url: `http://localhost:8000/user/put?username=${this.$route.params.user.username}`,
         headers: {
           "Content-Type": "application/json"
