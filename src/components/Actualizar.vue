@@ -3,55 +3,73 @@
     <div class="perfil" id="perfil">
       <div class="Titulo">
         <h1>Billeter<span>App</span></h1>
-        <h2>Datos</h2>
-      </div>
-      <form v-on:submit.prevent="Actualizar_datos">
-        <h3>
-          Nombre: <span>{{ user.nombre }}</span>
-        </h3>
-
-        <h3>
-          Usuario: <span> {{ user.username }} </span>
-        </h3>
-
-        <h3>
-          Contraseña: <span> {{ user.password }} </span>
-        </h3>
-
-        <h3>
-          Email: <span> {{ user.email }} </span>
-        </h3>
-        <button class="boton" type="submit">
-              Actualizar 
+        <h2>Actualización de datos</h2>
+        <form name="update" v-on:submit.prevent="Actualizar">
+          <table>
+            <tr>
+              <td>
+                <label for="Contrasena">Contraseña </label>
+                <input
+                  type="password"
+                  placeholder="Contraseña"
+                  id="contra"
+                  v-model="user_in_db.password"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  placeholder="email"
+                  id="correo"
+                  v-model="user_in_db.email"
+                />
+              </td>
+            </tr>
+            <button  class="boton" type="submit">
+              Guardar
             </button>
-      </form>
+            <br />
+            <br />
+          </table>
+        </form>
+      </div>
     </div>
   </body>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: "Perfil",
+  name: "Actualizar",
   data: function() {
     return {
       user_in_db: {
         password: "",
         email: ""
       },
-      user: this.$route.params.user,
     }
   },
 
   methods: {
-
-    Actualizar_datos(){
-     console.log(this.user)
-     this.$router.push({name: "Actualizar", params:{user: this.user}})
-    },
-
-    mounted() {
-      console.log(this.$route.params);
-    },
+    Actualizar() {
+      console.log(this.$route.params.user)
+      var self = this;
+      var config = {
+        method: "put",
+        url: `https://billetera-app.herokuapp.com/user/registro?username=${this.$route.params.user.username}`,
+        // url: `http://localhost:8000/user/put?username=${this.$route.params.user.username}`,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        data: JSON.stringify(self.user_in_db)
+      };
+      axios(config).then(result => {
+        console.log(result.data);
+      });
+    }
   }
 };
 </script>

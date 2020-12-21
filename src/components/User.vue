@@ -48,6 +48,7 @@ export default {
         method: "GET",
         url: `https://billetera-app.herokuapp.com/user/${self.user_in_db.username}`,
         // url: `http://localhost:8000/user/${self.user_in_db.username}`,
+        cors: "no-cors"
       };
 
       axios(config)
@@ -55,7 +56,7 @@ export default {
           console.log(result);
           if (result.data.password == self.user_in_db.contraseña)
               this.$router.push({name: "perfil", params:{user: result.data}})
-          alert("Autenticación exitosa");
+               alert("Autenticación exitosa");
           self.$emit("login", self.user_in_db.username);
         })
 

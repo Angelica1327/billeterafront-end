@@ -3,6 +3,7 @@ import Registro from './components/Registro'
 import User from './components/User'
 import App from './App'
 import Perfil from './components/Perfil'
+import Actualizar from './components/Actualizar'
 
 const router = new vueRouter({
         mode: 'history',
@@ -29,6 +30,12 @@ const router = new vueRouter({
                 path: '/user/registro',
                 name: "registro",
                 component: Registro
+            },
+
+            {
+                path: '/user/put',
+                name: "Actualizar",
+                component: Actualizar
             },
         ]
     })
